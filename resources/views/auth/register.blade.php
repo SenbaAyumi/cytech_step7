@@ -66,13 +66,14 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('新規登録') }}
                                 </button>
-                            </div>
-                        </div>
-                        <div class="col-md-6 offset-md-4">
+
                                 <a href="{{ route('login') }}" class="btn btn-primary">
                                     {{ __('戻る') }}
                                 </a>
-                         </div>
+                            </div>
+
+                        </div>
+
                     </form>
                 </div>
             </div>

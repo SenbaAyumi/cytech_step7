@@ -31,7 +31,7 @@
         <th>価格</th>
         <th>在庫数</th>
         <th>メーカー名</th>
-        <th><a href="{{route('product.create')}}"><button id = "registbtn">新規登録</button></a></th>
+        <th colspan="2"><a href="{{route('product.create')}}"><button id = "mainbtn">新規登録</button></a></th>
     </thead>
     <tbody>
     @foreach ($products as $product)
@@ -46,6 +46,8 @@
                 @endforeach </td> 
        <td>
          <a href = "{{route('product.show',$product->id)}}"><button id = "infobtn">詳細</button></a>
+       </td>
+       <td>
          <form method="POST" action="{{ route('product.delete', $product->id) }}" >
           @csrf
           @method('DELETE')

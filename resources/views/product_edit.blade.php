@@ -1,7 +1,8 @@
 @extends('layouts.template')
 
-@push('css')
-  <link href="{{ asset('css/product_list.css') }}" rel="stylesheet">
+@push ('css')
+ <link rel="stylesheet" href="{{ asset('\css\product_list.css') }}" >
+@endpush
 
   @section('title', '商品情報編集画面')
 
@@ -9,7 +10,7 @@
   <h1>商品情報編集画面</h1>
 
   <div class = "edit">
-    <form method="POST" action="{{ route('product.update', $product->id) }}" >
+    <form method="POST" action="{{ route('product.update', $product->id) }}" enctype='multipart/form-data'>
       @method('PUT')
       @csrf
     <table>
@@ -50,8 +51,8 @@
             </td>
         </tr>
     </table>
-    <button type="submit" class="editbtn">更新</button>
+    <button type="submit" id = "mainbtn">更新</button>
 </form>
-    <a class="backbtn" href="{{route('product.show',$product->id)}}">戻る</a>
+    <a  href="{{route('product.show',$product->id)}}"><button id="backbutton">戻る</button></a>
   </div> 
 @endsection

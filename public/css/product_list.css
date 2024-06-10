@@ -20,20 +20,21 @@ body{
     border-radius: 5px;
 }
 
+
 table{
     border: 1px solid;
-    border-color: black;
+    border-color: rgb(0, 0, 0);
     border-collapse:collapse;
     border-spacing: 0;
 }
 
 thead{
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(212, 211, 211);
     height : 60px;
 }
 
 td{
-    background-color: aquamarine;
+    background-color: rgb(198, 198, 198);
     height : 60px;
     border : solid;
     border-width : 0px 0px 1px 0px;
@@ -44,10 +45,22 @@ td{
     padding-top: 10px;
 }
 
-#registbtn {
+#mainbtn {
     background-color: orange;
     border-color: orange;
     border-radius: 5px;
+}
+
+
+
+#backbutton{
+    display:block;
+    width: 60px;
+    color: black;
+    background-color: aqua;
+    border-color: aqua;
+    border-radius: 5px;
+    text-decoration: none;
 }
 
 
@@ -66,3 +79,9 @@ td{
 }
 
 .img {height: 100px;}
+
+.button-container {
+    margin-top: 20px;
+    display: flex;
+    column-gap: 40px;
+  }

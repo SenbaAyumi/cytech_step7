@@ -1,7 +1,8 @@
 @extends('layouts.template')
 
-@push('css')
-  <link href="{{ asset('css/product_list.css') }}" rel="stylesheet">
+@push ('css')
+ <link rel="stylesheet" href="{{ asset('\css\product_list.css') }}" >
+@endpush
 
 
   @section('title', '商品情報登録画面')
@@ -48,8 +49,9 @@
             <td><input type = "file" name = "img_path" class = "form-control"></td>
         </tr>
     </table>
-    <button type="submit" class="registbtn">新規登録</button>
+    <button type="submit" id = "mainbtn">新規登録</button>
  </form>
-  <a class="backbtn" href="{{ route('product.list') }}">戻る</a>
+ <br>
+  <a  href="{{ route('product.list') }}" ><button id="backbutton" >戻る</bottom></a>
  </div>   
 @endsection

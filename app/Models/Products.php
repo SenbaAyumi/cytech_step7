@@ -9,4 +9,6 @@ use Illuminate\support\Facades\DB;
 class Products extends Model
 {
     use HasFactory;
+
+    
 }

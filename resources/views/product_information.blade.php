@@ -1,7 +1,8 @@
 @extends('layouts.template')
 
-@push('css')
-  <link href="{{ asset('css/product_list.css') }}" rel="stylesheet">
+@push ('css')
+ <link rel="stylesheet" href="{{ asset('\css\product_list.css') }}" >
+@endpush
   
 
   @section('title', '商品情報詳細画面')
@@ -44,8 +45,11 @@
             <td>{{ $product->comment }}</td>
         </tr>
     </table>
-    <a href = "{{route('product.edit',$product->id)}}"><button id = "editbtn">編集</button></a>
-    <a class="backbtn" href="{{ route('product.list') }}">戻る</a>
+  </div>
+
+  <div class="button-container">
+    <a href = "{{route('product.edit',$product->id)}}"><button id = "mainbtn">編集</button></a>
+    <a href="{{ route('product.list') }}"><button id="backbutton" >戻る</button></a>
   </div>
 
   
