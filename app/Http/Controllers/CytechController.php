@@ -14,29 +14,29 @@ class CytechController extends Controller
     {
         $companies = Companies::all();
 
-        $keyword = $request->input('search');
+        $keyword = $request -> input ('search');
         $select = $request -> select;
 
         if (!empty($keyword)) {
             $query = Products::query();
-            $query->where ('product_name', 'LIKE', "%{$keyword}%");
+            $query -> where ('product_name', 'LIKE', "%{$keyword}%");
             $products = $query -> paginate(5);
         } elseif (!empty($select)) {
             $query = Products::query();
-            $query->where ('company_id', 'LIKE', "%{$select}%");
-            $products = $query->paginate(5);
+            $query -> where ('company_id', 'LIKE', "%{$select}%");
+            $products = $query -> paginate(5);
         } else {
         $products = Products::paginate(5);
         }
         return view ('product_list', ['products' => $products, 'keyword' => $keyword ])
-        -> with ('companies',$companies);
+        -> with ('companies', $companies);
     }
 
     public function create()
     {
         $companies = Companies::all();
         return view ('product_register')
-        -> with ('companies',$companies);
+        -> with ('companies', $companies);
     }
 
     public function post (ProductRequest $request)
@@ -61,7 +61,7 @@ class CytechController extends Controller
                  
         $product -> save();
 
-        return redirect() -> route('product.show',$product->id);
+        return redirect() -> route('product.show', $product->id);
     }
 
     public function edit($id)
@@ -69,7 +69,7 @@ class CytechController extends Controller
         $product = Products::find($id);
         $companies = Companies::all();
         return view ('product_edit',['product' => $product])
-        -> with ('companies',$companies);
+        -> with ('companies', $companies);
     }
 
     public function show ($id)
@@ -77,13 +77,13 @@ class CytechController extends Controller
         $product = Products::find($id); 
         $companies = Companies::all();
         return view ('product_information',['product' => $product])
-        -> with ('companies',$companies);
+        -> with ('companies', $companies);
         
     }
 
-    public function update (Products $product,ProductRequest $request)
+    public function update (Products $product, ProductRequest $request)
     {
-        $image = $request->file ('img_path');
+        $image = $request -> file ('img_path');
         if ($image){
             $file_name = $image -> getClientOriginalName();
             $image -> storeAs ('public/images', $file_name);
@@ -100,7 +100,7 @@ class CytechController extends Controller
            } 
         $product -> save();
 
-        return redirect() -> route ('product.show',$product->id); 
+        return redirect() -> route ('product.show', $product->id); 
     }
 
     public function delete (Products $product)

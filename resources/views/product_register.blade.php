@@ -12,12 +12,12 @@
 
 
   <div class = "register">
-    <form method="POST" action="{{ route('product.post') }}" enctype='multipart/form-data'>
+    <form method="POST" action="{{ route('product.post') }}" enctype = 'multipart/form-data'>
       @csrf
     <table>
         <tr>
             <th class = "required">商品名</th>
-            <td><input type = "text" name="product_name"  required></td>
+            <td><input type = "text" name = "product_name"  required></td>
         </tr>
         @error('product_name')
         <tr><th>error</th><td>入力してください</td></tr>
@@ -25,9 +25,9 @@
         <tr>
             <th class = "required">メーカー名</th>
             <td><select name = "company_id" required >
-                        <option value='' disabled selected style='display:none;'>分類を選択してください</option>
+                        <option value = '' disabled selected style = 'display:none;'>分類を選択してください</option>
                    @foreach ($companies as $company)
-                        <option value="{{ $company->id }}">{{ $company->company_name}}</otion>
+                        <option value="{{ $company -> id }}">{{ $company -> company_name}}</otion>
                     @endforeach
                 </select>
             </td>
@@ -49,12 +49,12 @@
             <td><input type = "file" name = "img_path" class = "form-control"></td>
         </tr>
     </table>
-    @foreach($errors->all() as $message)
-    <p class="error">{{$message}}</p>
+    @foreach($errors -> all() as $message)
+    <p class = "error">{{$message}}</p>
     @endforeach
-    <button type="submit" id = "mainbtn">新規登録</button>
+    <button type = "submit" id = "mainbtn">新規登録</button>
  </form>
  <br>
-  <a  href="{{ route('product.list') }}" ><button id="backbutton" >戻る</bottom></a>
+  <a  href="{{ route('product.list') }}" ><button id = "backbutton" >戻る</bottom></a>
  </div>   
 @endsection

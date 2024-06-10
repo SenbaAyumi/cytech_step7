@@ -26,10 +26,6 @@ Route::get('/product_information/{product}', 'App\Http\Controllers\CytechControl
 
 Route::get('/product_edit/{product}', 'App\Http\Controllers\CytechController@edit')->name('product.edit')->middleware('auth');
 Route::put('/product_edit/{product}', 'App\Http\Controllers\CytechController@update')->name('product.update')->middleware('auth');
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
