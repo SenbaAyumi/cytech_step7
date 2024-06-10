@@ -49,6 +49,9 @@
             <td><input type = "file" name = "img_path" class = "form-control"></td>
         </tr>
     </table>
+    @foreach($errors->all() as $message)
+    <p class="error">{{$message}}</p>
+    @endforeach
     <button type="submit" id = "mainbtn">新規登録</button>
  </form>
  <br>

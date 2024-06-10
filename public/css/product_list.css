@@ -85,3 +85,8 @@ td{
     display: flex;
     column-gap: 40px;
   }
+
+  p.error {
+    color: rgb(255, 255, 255);
+    background-color: rgb(255, 0, 0);
+  }

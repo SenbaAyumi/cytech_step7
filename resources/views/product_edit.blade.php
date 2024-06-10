@@ -51,6 +51,9 @@
             </td>
         </tr>
     </table>
+    @foreach($errors->all() as $message)
+    <p class="error">{{$message}}</p>
+    @endforeach
     <button type="submit" id = "mainbtn">更新</button>
 </form>
     <a  href="{{route('product.show',$product->id)}}"><button id="backbutton">戻る</button></a>

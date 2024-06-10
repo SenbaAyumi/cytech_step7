@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductRequest;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Products;
 use App\Models\Companies;
@@ -37,14 +39,9 @@ class CytechController extends Controller
         -> with ('companies',$companies);
     }
 
-    public function post (Request $request)
+    public function post (ProductRequest $request)
     {
-        $request-> validate = ([
-            'product_name' => 'required',
-            'company_id' => 'required',
-            'price' => 'numeric',
-            'stock' => 'numeric',
-        ]);
+
         $image = $request -> file ('img_path');
         if ($image){
             $file_name = $image -> getClientOriginalName();
@@ -84,7 +81,7 @@ class CytechController extends Controller
         
     }
 
-    public function update (Products $product,Request $request)
+    public function update (Products $product,ProductRequest $request)
     {
         $image = $request->file ('img_path');
         if ($image){
