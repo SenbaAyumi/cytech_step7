@@ -1,0 +1,68 @@
+@charset "UTF-8";
+
+body{
+    padding-top: 30px;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+#delbtn{
+    color: white;
+    background-color: red;
+    border-color: red;
+    border-radius: 5px;
+}
+
+#infobtn{
+    color:rgb(255, 255, 255);
+    background-color: blue;
+    border-color: blue;
+    border-radius: 5px;
+}
+
+table{
+    border: 1px solid;
+    border-color: black;
+    border-collapse:collapse;
+    border-spacing: 0;
+}
+
+thead{
+    background-color: rgb(255, 255, 255);
+    height : 60px;
+}
+
+td{
+    background-color: aquamarine;
+    height : 60px;
+    border : solid;
+    border-width : 0px 0px 1px 0px;
+    text-align : center;
+}
+
+.links{
+    padding-top: 10px;
+}
+
+#registbtn {
+    background-color: orange;
+    border-color: orange;
+    border-radius: 5px;
+}
+
+
+.pagination {
+    text-align: center;
+}
+
+
+.pagination li{
+    display: inline-block;
+}
+
+.required::after {
+    content: "*";
+    color:red;
+}
+
+.img {height: 100px;}
