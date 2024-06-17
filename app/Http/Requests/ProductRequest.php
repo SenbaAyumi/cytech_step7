@@ -28,6 +28,8 @@ class ProductRequest extends FormRequest
             'company_id' => 'required',
             'price' => 'required | numeric',
             'stock' => 'required | numeric',
+            'comment' => 'nullable',
+            'img_path' => 'nullable',
         ];
     }
 
@@ -38,7 +40,7 @@ class ProductRequest extends FormRequest
             'price.required' => ':価格は必須項目です。',
             'price.numeric' => ':価格は半角数字で入力してください。',
             'stock.required' => ':在庫数は必須項目です。',
-            'stock.numeric' => ':価格は半角数字で入力してください。',
+            'stock.numeric' => ':在庫数は半角数字で入力してください。',
         ];
     }
 }

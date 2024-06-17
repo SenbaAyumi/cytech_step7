@@ -10,76 +10,80 @@ use App\Models\Companies;
 
 class CytechController extends Controller
 {
-    public function index(Request $request) 
+    public function index(Request $request)
     {
-        $companies = Companies::all();
+        $company_model = new Companies();
+        $companies = $company_model -> getCompany();
 
-        $keyword = $request -> input ('search');
-        $select = $request -> select;
+        $product_model = new Products();
+        $products = $product_model -> getProductList($request);
 
-        if (!empty($keyword)) {
-            $query = Products::query();
-            $query -> where ('product_name', 'LIKE', "%{$keyword}%");
-            $products = $query -> paginate(5);
-        } elseif (!empty($select)) {
-            $query = Products::query();
-            $query -> where ('company_id', 'LIKE', "%{$select}%");
-            $products = $query -> paginate(5);
-        } else {
-        $products = Products::paginate(5);
-        }
-        return view ('product_list', ['products' => $products, 'keyword' => $keyword ])
+        return view ('product_list', ['products' => $products])
         -> with ('companies', $companies);
     }
 
     public function create()
     {
-        $companies = Companies::all();
+        $company_model = new Companies();
+        $companies = $company_model -> getCompany();
         return view ('product_register')
         -> with ('companies', $companies);
     }
 
+
     public function post (ProductRequest $request)
     {
-
         $image = $request -> file ('img_path');
         if ($image){
             $file_name = $image -> getClientOriginalName();
             $image -> storeAs ('public/images', $file_name);
-        }    
-        
-        $product = new Products;
-        $product -> product_name = $request -> input(['product_name']);
-        $product -> company_id = $request -> input(['company_id']);
-        $product -> price = $request -> input(['price']);
-        $product -> stock = $request -> input(['stock']);
-        $product -> comment = $request -> input(['comment']);
-       
-       if ($image){
-        $product -> img_path = "images/$file_name";
-       } 
-                 
-        $product -> save();
+            $img_path =  "images/$file_name";
+        } else{
+            $img_path = null;
+        }
+ 
+        $product = new Products();
 
-        return redirect() -> route('product.show', $product->id);
+        DB::beginTransaction();
+        
+        try{
+            $product -> registProduct($request, $img_path);
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return back();
+        }
+
+        return redirect() -> route('product.create');
     }
+
 
     public function edit($id)
     {
-        $product = Products::find($id);
-        $companies = Companies::all();
-        return view ('product_edit',['product' => $product])
+        $product_model = new Products();
+        $products = $product_model -> productIdShow($id);
+ 
+        $company_model = new Companies();
+        $companies = $company_model -> getCompany();
+ 
+        return view ('product_edit',['product' => $products])
         -> with ('companies', $companies);
     }
 
+
     public function show ($id)
     {
-        $product = Products::find($id); 
-        $companies = Companies::all();
-        return view ('product_information',['product' => $product])
+        $product_model = new Products();
+        $products = $product_model -> productIdShow($id);
+ 
+        $company_model = new Companies();
+        $companies = $company_model -> getCompany();
+
+        return view ('product_information',['product' => $products])
         -> with ('companies', $companies);
         
     }
+
 
     public function update (Products $product, ProductRequest $request)
     {
@@ -87,25 +91,38 @@ class CytechController extends Controller
         if ($image){
             $file_name = $image -> getClientOriginalName();
             $image -> storeAs ('public/images', $file_name);
-        }  
+            $img_path =  "images/$file_name"; 
+        }  else{
+            $img_path = null;
+        }
+
+        DB::beginTransaction();
         
-
-        $product -> product_name = $request -> input(['product_name']);
-        $product -> company_id = $request -> input(['company_id']);
-        $product -> price = $request -> input(['price']);
-        $product -> stock = $request -> input(['stock']);
-        $product -> comment = $request -> input(['comment']);
-        if ($image){
-            $product -> img_path = "images/$file_name";
-           } 
-        $product -> save();
-
-        return redirect() -> route ('product.show', $product->id); 
+        try{
+            $model = new  Products();
+            $model -> productEdit($product, $request, $img_path);
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return back();
+        }
+        
+        return redirect() -> route('product.edit', $product -> id); 
     }
 
+    
     public function delete (Products $product)
     {
-        $product->delete();
+        DB::beginTransaction();
+        
+        try{
+            $model = new  Products();
+            $model -> productDelete($product);
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return back();
+        }
         return redirect() -> route('product.list');
     }
 }
