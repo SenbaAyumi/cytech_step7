@@ -12,22 +12,18 @@ class CytechController extends Controller
 {
     public function index(Request $request)
     {
-        $company_model = new Companies();
-        $companies = $company_model -> getCompany();
-
         $product_model = new Products();
         $products = $product_model -> getProductList($request);
+        $companies = $product_model -> companySelect();
 
-        return view ('product_list', ['products' => $products])
-        -> with ('companies', $companies);
+        return view ('product_list', ['products' => $products, 'companies' => $companies]);
     }
 
     public function create()
     {
-        $company_model = new Companies();
-        $companies = $company_model -> getCompany();
-        return view ('product_register')
-        -> with ('companies', $companies);
+        $product_model = new Products();
+        $companies = $product_model -> companySelect();
+        return view ('product_register', ['companies' => $companies]);
     }
 
 
@@ -62,12 +58,9 @@ class CytechController extends Controller
     {
         $product_model = new Products();
         $products = $product_model -> productIdShow($id);
- 
-        $company_model = new Companies();
-        $companies = $company_model -> getCompany();
- 
-        return view ('product_edit',['product' => $products])
-        -> with ('companies', $companies);
+        $companies = $product_model -> companySelect();
+  
+        return view ('product_edit',['product' => $products, 'companies' => $companies]);
     }
 
 
@@ -76,11 +69,7 @@ class CytechController extends Controller
         $product_model = new Products();
         $products = $product_model -> productIdShow($id);
  
-        $company_model = new Companies();
-        $companies = $company_model -> getCompany();
-
-        return view ('product_information',['product' => $products])
-        -> with ('companies', $companies);
+        return view ('product_information',['product' => $products]);
         
     }
 

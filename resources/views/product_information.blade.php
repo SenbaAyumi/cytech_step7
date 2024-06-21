@@ -27,9 +27,7 @@
         <tr>
             <th>メーカー</th>
             <td>
-                @foreach ($companies as $company)
-                  @if($company -> id == $product -> company_id) {{ $company -> company_name }} @endif
-                @endforeach
+              {{ $product -> company_name }} 
             </td>
         </tr>
         <tr>

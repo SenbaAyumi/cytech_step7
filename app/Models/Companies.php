@@ -10,10 +10,4 @@ class Companies extends Model
 {
     use HasFactory;
 
-    public function getCompany() {
-
-        $companies = DB::table('companies') -> get();
-
-        return $companies;
-    }
 }

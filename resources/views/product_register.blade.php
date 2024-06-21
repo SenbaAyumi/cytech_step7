@@ -26,8 +26,8 @@
             <th class = "required">メーカー名</th>
             <td><select name = "company_id" required >
                         <option value = '' disabled selected style = 'display:none;'>分類を選択してください</option>
-                   @foreach ($companies as $company)
-                        <option value="{{ $company -> id }}">{{ $company -> company_name}}</otion>
+                   @foreach ($companies -> unique('comid') as $company)
+                        <option value="{{ $company -> comid }}">{{ $company -> company_name}}</otion>
                     @endforeach
                 </select>
             </td>

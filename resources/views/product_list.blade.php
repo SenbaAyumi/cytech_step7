@@ -15,9 +15,10 @@
     <input type = "search" name = "search" placeholder = "検索キーワード">
     <select name = "select">
        <option value='' disabled selected style='display:none;'>メーカー名</option>
-       @foreach ($companies as $company)
-       <option value="{{ $company->id }}" >{{ $company->company_name}}</otion>
-      @endforeach
+       @foreach ($companies -> unique('comid') as $company)
+       <tr>
+       <option value="{{ $company->comid }}" >{{ $company->company_name}}</otion>
+       @endforeach
     </select>
     <input type = "submit" name = "submit" value = "検索">
   </form>
@@ -41,9 +42,7 @@
        <td> {{ $product -> product_name }} </td>
        <td> {{ $product -> price }} 円 </td>
        <td> {{ $product -> stock }} </td>
-       <td>     @foreach ($companies as $company)
-                  @if($company -> id == $product -> company_id) {{ $company -> company_name }} @endif
-                @endforeach </td> 
+       <td> {{ $product -> company_name }} </td> 
        <td>
          <a href = "{{route('product.show', $product -> id)}}"><button id = "infobtn">詳細</button></a>
        </td>

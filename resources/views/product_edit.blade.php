@@ -25,9 +25,8 @@
         <tr>
             <th class = "required">メーカー名</th>
             <td><select name = "company_id" >
-                   <option>分類を選択してください</option>
-                   @foreach ($companies as $company)
-                        <option value = "{{ $company -> id }}" @if ($company -> id == $product -> company_id) selected @endif> {{ $company -> company_name}} </otion>
+                   @foreach ($companies -> unique('comid')  as $company)
+                        <option value = "{{ $company -> comid }}" @if ($company -> comid == $product -> company_id) selected @endif> {{ $company -> company_name}} </otion>
                     @endforeach
                 </select>
             </td>
